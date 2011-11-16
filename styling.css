@@ -1,0 +1,226 @@
+html{
+height: 100%;
+}
+body {
+height: 100%;
+background-image:url('Background.bmp');
+background-repeat:no-repeat;
+background-attachment:fixed;
+}
+
+h2{
+	
+	color:#c4852d;
+	text-align:center;
+	font-size:100px;
+	background-color:red;
+	font-family:"Brush Script MT", "Comic Sans", sans-serif;
+	margin:30px 0px 0px 0px;
+}
+h1{
+color:#785e23;
+font-size:50px;
+font-family:"Brush Script MT", "Comic Sans", sans-serif;
+}
+h3{
+color:#785e23;
+font-size:30px;
+font-family:"Apple Chancery", "Zapf Chancery", cursive;
+text-align:right;
+margin: 0px;
+}
+h4{
+color:#5C4033;
+font-size:18px;
+font-family:"Apple Chancery", "Zapf Chancery", cursive;
+text-align:right;
+margin: 0px;
+}
+a:link,a:visited {
+	color:#5C4033;
+}
+#loginform{
+	position:absolute;
+	right:20px;
+	top:5px;
+	
+}
+img.but{
+	display:block;
+	margin-right:auto;
+	margin-left:auto;
+	position:relative;
+
+	border: 1px solid #0000ff;
+
+	z-index:2;
+	
+}
+img.but:hover{
+	opacity:0.4;
+	filter:alpha(opacity=40);
+}
+img.man{
+	display:block;
+	z-index:1;
+	margin-right:auto;
+	margin-left:auto;
+}
+
+#pageOptionsTable{
+	z-index:2;
+	top:1200px;
+	display:block;
+	margin-right:auto;
+	margin-left:auto;
+}
+#container {
+	
+	position: absolute;
+	top:350px;
+	bottom: 10px;
+	padding:10px;
+	left: 500px;
+	
+	width: 784px; /* width + border for IE 5.x */
+	width: 780px; /* real width */
+	
+
+	margin: auto;
+
+}
+#content{
+	background-color:white;
+	position: relative;
+	padding:10px;
+	padding-left:50px;
+	padding-right:50px;
+	/*border: dashed #036;*/
+	border-width: 40px;	
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+}
+#menuContainer{
+	position: absolute;
+	top:450px;
+	bottom: 10px;
+	padding:10px;
+	left: 150px;
+	
+	width: 250px; /* width + border for IE 5.x */
+	width: 250px; /* real width */
+	
+
+	margin: auto;
+}
+#menuContent{
+	background-color:white;
+	position: relative;
+	padding:10px;
+	padding-left:50px;
+	padding-right:50px;
+	/*border: dashed #036;*/
+	border-width: 40px;	
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+
+}
+#topMenuContainer{
+	position: absolute;
+	top:250px;
+	bottom: 10px;
+	padding:10px;
+	left: 500px;
+	
+	/*width: 584px; /* width + border for IE 5.x */
+	/*width: 580px; /* real width */
+	
+
+	margin: auto;
+}
+#topMenuContent{
+	background-color:white;
+	position: relative;
+	padding:10px;
+	padding-left:50px;
+	padding-right:50px;
+	/*border: dashed #036;*/
+	border-width: 40px;	
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+
+}
+#menulist li
+{
+	display: inline;
+	list-style-type: none;
+	padding-right: 20px;
+}
+#menulist a:link,a:visited {
+	color:#5C4033;
+        text-decoration: none;
+}
+#drinkOfTheDay{
+	border: solid #036;
+	border-width: 2px;	
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	text-align: center;
+	padding: 10px;
+}
+#drinkOfTheDay h4{
+	text-align:center;
+	
+}
+th
+{
+background-color:#785e23;
+color:white;
+}
+ul.tv, .tv ul { 
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}	
+
+.tv li { 
+	position: relative;
+	margin: 0;
+	padding: 4px 0 3px 20px;
+	z-index: 10;
+}
+
+div.tvca { /* Clickable Area */
+	_background: #fff;
+	_filter: alpha(opacity=0);
+	/* 
+		border: 1px solid #fdd; 
+	*/ /* Useful for showing the hit area */
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	top: 1px;
+	left: -1px;
+	_left: -21px; /* IE... damnit! */
+	cursor: pointer;
+	z-index: 50;
+}
+
+.tv li, .tv .tvi /* Tree View Item */ { background: url(img/treeView/dotted/tvi.gif) 0 0 no-repeat; }
+	
+.tv .tvic /* Tree View Item, Collapsable */ { background-image: url(img/treeView/dotted/tvic.gif); }
+.tv .tvie /* Tree View Item, Expandable */ { background-image: url(img/treeView/dotted/tvie.gif); }
+
+.tv .tvil /* Tree View Last Item */ { background-image: url(img/treeView/dotted/tvil.gif); }
+.tv .tvilc /* Tree View Last Item, Collapsable */ { background-image: url(img/treeView/dotted/tvilc.gif); }
+.tv .tvile /* Tree View Last Item, Expandable */ { background-image: url(img/treeView/dotted/tvile.gif); }
+
+.tvload /* Loading Icon */ { background-image: url(img/treeView/dotted/tviload.gif); }
+
+.tvclosed ul,
+.tvclosed li.tvclosed ul	{
+	display: none;
+}
+.tvclosed ul ul {
+	display: block;
+}
