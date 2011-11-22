@@ -9,9 +9,12 @@ if($session->logged_in){
 		<link rel="stylesheet" href="nyroModal.css" />
 		<script src="jquery-1.7.js" type="text/javascript"></script>
 		<script src="jquery.nyroModal.custom.js" type="text/javascript"></script>	
-		<<link rel="stylesheet" href="styling.css" />
+		<link rel="stylesheet" href="styling.css" />
+	    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAyeLpPg7oK__ZdP-CCrs57xQtJ3_mdHtcnfkdiGb4Eb2NzU-cqxR_9mKNOgUHKkEdeI3bDnFKDglo_A&sensor=false"
+            type="text/javascript"></script>
+	    <script src="controlMap.js" type="text/javascript"></script>
 	</head>
-	<body>
+	<body onload="initialize()" onunload="GUnload()">
 		<script type="text/javascript">
 			function goToPregame(){
 				window.location="http://rustagi1.projects.cs.illinois.edu/DrinksAlot/pregame.php";
@@ -32,11 +35,6 @@ if($session->logged_in){
  				<td align='centert'><img class="but" onclick="goToPostgame()" src="postgame.png" width=250 height=250></td>
  			</tr>
   		</table>
-		
-
-		
-
-
 		
 
 		
@@ -72,7 +70,7 @@ if($session->logged_in){
 			include("RegisterForm.php");
 		?>
 		</div>	
-
+		
 		<script type="text/javascript">
 			$(function() {
 			  $('.nyroModal').nyroModal();

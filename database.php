@@ -169,6 +169,17 @@ VALUES ('$username','$realname',$age,$gender,'$password','$location','$email',0)
 		$q = "SELECT DISTINCT Category From ". TBL_DRINKS ." ORDER BY Category";
 		return mysql_query($q, $this -> connection);		
 	}
+	function checkDrinkExists($DrinkName){
+		$q = "SELECT COUNT(DrinkName) From ". TBL_DRINKS ." WHERE DrinkName='$DrinkName'";
+		$result = mysql_query($q, $this -> connection);	
+		$result = (mysql_fetch_array($result));
+		if(intval($result['COUNT(DrinkName)']) >0){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 	function checkDrinkCategoryExists($category){
 		$q = "SELECT COUNT(Category) From ". TBL_DRINKS ." WHERE Category='$category'";
 		$result = mysql_query($q, $this -> connection);	
@@ -196,6 +207,10 @@ VALUES ('$username','$realname',$age,$gender,'$password','$location','$email',0)
 		$q = "SELECT * From ". TBL_DRINKS ." WHERE Category='$category' ORDER BY DrinkName";
 		return mysql_query($q, $this -> connection);
 	}
+	function getDrinkByName($name){
+		$q = "SELECT * From ". TBL_DRINKS ." WHERE DrinkName='$name'";
+		return mysql_query($q, $this -> connection);
+	}
 	function addStore($Name,$Address,$Rating){
 		$q = "INSERT INTO " .TBL_STORES ."(StoreName,Address,StoreRating) VALUES ('$Name','$Address',$Rating)";
 		#echo $q;
@@ -221,6 +236,10 @@ VALUES ('$username','$realname',$age,$gender,'$password','$location','$email',0)
 	}
 	function getAllIngredientTypesOrdered(){
 		$q = "SELECT DISTINCT TypeName FROM " . TBL_MAKES ." ORDER BY TypeName";
+		return mysql_query($q, $this -> connection);
+	}
+	function getAllAlcoholicIngredientTypesOrdered(){
+		$q = "SELECT DISTINCT TypeName FROM " . TBL_MAKES ." WHERE Alcoholic=1 ORDER BY TypeName";
 		return mysql_query($q, $this -> connection);
 	}
 	function getIngredientsSoldOrdered($store){
@@ -264,7 +283,10 @@ VALUES ('$username','$realname',$age,$gender,'$password','$location','$email',0)
 		//echo "<br>";
 		return mysql_query($q, $this -> connection);
 	}
-	
+	function getAllBarsMapInfo(){
+		$q = "SELECT * FROM ". TBL_BARS;
+		return mysql_query($q,$this->connection);
+	}
 };
 
 $database = new MySQLDB;

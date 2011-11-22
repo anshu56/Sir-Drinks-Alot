@@ -150,6 +150,31 @@ img.man{
 	-moz-border-radius: 15px;
 
 }
+#rightMenuContainer{
+	position: absolute;
+	top:450px;
+	bottom: 10px;
+	padding:10px;
+	left: 1300px;
+	
+	width: 250px; /* width + border for IE 5.x */
+	width: 250px; /* real width */
+	
+
+	margin: auto;
+}
+#rightMenuContent{
+	background-color:white;
+	position: relative;
+	padding:10px;
+	padding-left:50px;
+	padding-right:50px;
+	/*border: dashed #036;*/
+	border-width: 40px;	
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+
+}
 #menulist li
 {
 	display: inline;

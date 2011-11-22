@@ -14,7 +14,12 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="styling.css" />
 		<link rel="stylesheet" href="treeView/jquery.treeview.css" />
+	    <script src="http://maps.googleapis.com/maps/api/js?key=ABQIAAAAyeLpPg7oK__ZdP-CCrs57xQtJ3_mdHtcnfkdiGb4Eb2NzU-cqxR_9mKNOgUHKkEdeI3bDnFKDglo_A&sensor=true"
+            type="text/javascript"></script>
+		<script src="controlMap.js" type="text/javascript"></script>
 		<script src="jquery-1.7.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="nyroModal.css" />
+		<script src="jquery.nyroModal.custom.js" type="text/javascript"></script>	
 		<script src="treeView/jquery.cookie.js" type="text/javascript"></script>
 		<script src="treeView/jquery.treeview.js" type="text/javascript"></script>
 			<script type="text/javascript">
@@ -27,7 +32,8 @@
 		});
 		</script>
 	</head>
-	<body>
+	<body onload="initialize()" onunload="GUnload()">
+		<div id='topLogin'>
 		<h4>
 			<?
 				if($session->logged_in){
@@ -38,16 +44,16 @@
 				}
 				else{
 			?>
-				<link rel="stylesheet" href="nyroModal.css" />
-				<script src="jquery.nyroModal.custom.js" type="text/javascript"></script>	
+
 				<form action="process.php" method="post" enctype="multipart/form-data">
 				Username: <input type="text" maxlength="25" name="user" />
 				Password: <input type="password" maxlength="25" name="pass" />
 	
 				<input type="hidden" name="sublogin" value="1">
 				<input type="submit" name="submit" style="background-color:#EAAA5D" value="Login" /> 
-				<a href="#registerForm" style="text-decoration: none;" class="nyroModal"> <input type="button" id="RegisterButton" style="background-color:#EAAA5D" name="" value="Register" /></a>
-				</form></h4>
+			<a href="#registerForm" style="text-decoration: none;" class="nyroModal"> <input type="button" id="RegisterButton" style="background-color:#EAAA5D" name="" value="Register" /></a>
+			</form></h4>
+			</div>
 				<?
 				include("RegisterForm.php");
 				?>
@@ -63,6 +69,7 @@
 		<?
 			include("mikestyling.php");
 		?>
+		
 		<p>
 			
 		</p>
@@ -106,7 +113,7 @@
 					<li><span>Ingredients</span>
 						<ul>
 							<?
-								$result = $database->getAllIngredientTypesOrdered();
+								$result = $database->getAllAlcoholicIngredientTypesOrdered();
 								$dbArray = mysql_fetch_array($result);
 								while($dbArray!=NULL){
 									echo "<li><span>".$dbArray['TypeName']."</span></li>";
@@ -118,5 +125,16 @@
 					</ul>
 			</div>
 		</div>
+		<div id="rightMenuContainer">
+			<div id="rightMenuContent">
+			<ul>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModal">Nearest Bathroom</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModal">Closest Bar</a></li>
+			</ul>			
+			</div>
+		</div>
+		<?
+			include("displayMap.php");
+		?>
 		<div id="container">
 		<div id="content">

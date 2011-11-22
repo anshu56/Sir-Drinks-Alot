@@ -36,4 +36,5 @@
 	<input type="hidden" name="subjoin" value="1" />
 	<input type="submit" name="submit" value="Create Account" />
 </form>
+
 </div>

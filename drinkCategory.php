@@ -23,7 +23,8 @@
 			while($dbarray!=NULL){
 				$newName = str_replace(" ","!",$dbarray['DrinkName']);
 				echo "<tr id=".$newName.">";
-				echo "<td>".$dbarray['DrinkName']."</td>";
+				$drinksNameFixed = str_replace(" ","!",$dbarray['DrinkName']);
+				echo "<td> <a href='drinkDetails.php?dname=$drinksNameFixed'>".$dbarray['DrinkName']."</a></td>";
 				echo "<td>".$dbarray['Difficulty']."</td>";
 				echo "<td>".$dbarray['Rating']."</td>";
 				#echo "<td> <button onclick=\"removeDrink(".$dbarray['DrinkName'].")\">Remove</button> </td>";
@@ -35,7 +36,3 @@
 		?>
 		
 		</table>
-		</div>
-		</div>
-	<body>
-<html>
