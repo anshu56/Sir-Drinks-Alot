@@ -1,3 +1,4 @@
+var lastOpenedMarker = null;
 function initialize() {
 	var latlng = new google.maps.LatLng(40.109713, -88.235783);
 	var myOptions = {
@@ -32,40 +33,22 @@ function initialize() {
 				var infowindow = new google.maps.InfoWindow({
 					content : contentString
 				});
+				
+				listenmarker(marker,infowindow,map);
 
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.open(map, marker);
-				});
 				//alert(results[0].geometry.location);
 			}
 		}
 	}
 	xmlhttp.open("GET", "getBarsMapInfo.php", true);
 	xmlhttp.send();
-	/*var address = "706 South 5th St., Champaign, IL 61820";
 
-	 var geocoder = new google.maps.Geocoder();
-
-	 geocoder.geocode( { 'address': address}, function(results, status) {
-	 if (status == google.maps.GeocoderStatus.OK) {
-	 var marker = new google.maps.Marker({
-	 map: map,
-	 position: results[0].geometry.location,
-	 title:"Joe's Brewery"
-	 });
-	 var contentString = "Joe's Bar";
-
-	 var infowindow = new google.maps.InfoWindow({
-	 content: contentString
-	 });
-
-	 google.maps.event.addListener(marker, 'click', function() {
-	 infowindow.open(map,marker);
-	 });
-	 //alert(results[0].geometry.location);
-	 } else {
-	 alert("Geocode was not successful for the following reason: " + status);
-	 }
-	 });*/
-
+}
+function listenmarker(marker,infowindow,map){
+		google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, this);
+					if(lastOpenedMarker!=null)
+						lastOpenedMarker.close();
+					lastOpenedMarker=infowindow;
+		});
 }
