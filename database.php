@@ -191,6 +191,17 @@ VALUES ('$username','$realname',$age,$gender,'$password','$location','$email',0)
 			return FALSE;
 		}
 	}
+	function checkIngredientTypeExists($typeName){
+		$q = "SELECT COUNT(TypeName) From ". TBL_MAKES ." WHERE TypeName='$typeName'";
+		$result = mysql_query($q, $this -> connection);	
+		$result = (mysql_fetch_array($result));
+		if(intval($result['COUNT(TypeName)']) >0){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 	function getNumDrinks(){
 		$q = "SELECT Count(DrinkName) From ". TBL_DRINKS;
 		$result =  mysql_query($q, $this -> connection);	
@@ -209,6 +220,11 @@ VALUES ('$username','$realname',$age,$gender,'$password','$location','$email',0)
 	}
 	function getDrinkByName($name){
 		$q = "SELECT * From ". TBL_DRINKS ." WHERE DrinkName='$name'";
+		return mysql_query($q, $this -> connection);
+	}
+	function getDrinksByIngredientType($typeName){
+		$q = "SELECT DISTINCT m.TypeName, m.DrinkName, d.Rating, d.Difficulty, d.Category From ". TBL_MAKES .' m ,'.TBL_DRINKS." d WHERE d.DrinkName = m.DrinkName
+AND m.TypeName = '$typeName'";
 		return mysql_query($q, $this -> connection);
 	}
 	function addStore($Name,$Address,$Rating){

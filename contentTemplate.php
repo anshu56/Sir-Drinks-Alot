@@ -116,7 +116,7 @@
 								$result = $database->getAllAlcoholicIngredientTypesOrdered();
 								$dbArray = mysql_fetch_array($result);
 								while($dbArray!=NULL){
-									echo "<li><span>".$dbArray['TypeName']."</span></li>";
+									echo "<li><span><a href=\"drinkFromIngredient.php?iname=".$dbArray['TypeName']."\">".$dbArray['TypeName']."</a></span></li>";
 									$dbArray = mysql_fetch_array($result);
 								}
 							?>
