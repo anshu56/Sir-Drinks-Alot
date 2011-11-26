@@ -31,6 +31,23 @@
 		});
 		});
 		</script>
+		<script type="text/javascript">
+						$(function() {
+							var width = 810;
+							var height = 410;
+					 		 $('.nyroModalMap').nyroModal({
+							  sizes: {
+							    initW: width, initH: height,
+							    minW: width, minH: height,
+							    w: width, h: height
+							  }});
+				
+						});
+						$(function() {
+					 		 $('.nyroModal').nyroModal();
+				
+						});
+		</script>
 	</head>
 	<body onload="initialize()" onunload="GUnload()">
 		<div id='topLogin'>
@@ -54,15 +71,8 @@
 			<a href="#registerForm" style="text-decoration: none;" class="nyroModal"> <input type="button" id="RegisterButton" style="background-color:#EAAA5D" name="" value="Register" /></a>
 			</form></h4>
 			</div>
-				<?
-				include("RegisterForm.php");
-				?>
-					<script type="text/javascript">
-						$(function() {
-						  $('.nyroModal').nyroModal();
-						});
-					</script>
 			<?
+				include("RegisterForm.php");
 			}
 			?>
 
@@ -87,6 +97,9 @@
 				<li><a href="#" text-align='right'>The Game</a></li>
 				<li><a href="#" text-align='right'>Post Game</a></li>
 				<?
+					if($session->logged_in){
+						echo"<li><a href=\"InMyBar.php\" text-align='right'>In My Bar</a></li>";
+					}
 					if($database->getAdmin($session->getUser())){
 						echo"<li><a href=\"maintenance.php\" text-align='right'>Maintenance</a></li>";
 					}
@@ -128,8 +141,8 @@
 		<div id="rightMenuContainer">
 			<div id="rightMenuContent">
 			<ul>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModal">Nearest Bathroom</a></li>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModal">Closest Bar</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap">Nearest Bathroom</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap">Closest Bar</a></li>
 			</ul>			
 			</div>
 		</div>

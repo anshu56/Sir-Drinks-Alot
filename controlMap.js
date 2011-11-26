@@ -1,4 +1,5 @@
 var lastOpenedMarker = null;
+var map;
 function initialize() {
 	var latlng = new google.maps.LatLng(40.109713, -88.235783);
 	var myOptions = {
@@ -6,7 +7,7 @@ function initialize() {
 		center : latlng,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
-	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 	var xmlhttp;
 	var geocoder = new google.maps.Geocoder();
@@ -42,22 +43,39 @@ function initialize() {
 	}
 	xmlhttp.open("GET", "getBarsMapInfo.php", true);
 	xmlhttp.send();
+	
+	if (typeof(navigator.geolocation) != 'undefined') {
+		//alert(typeof(navigator.geolocation.getCurrentPosition));
+	    navigator.geolocation.getCurrentPosition(locationFound,errorCall,{timeout:10000});
+	}
+}
 
-	var start = "510 East Clark St., Champaign, IL 61820";
-	var end = "706 South 5th St., Champaign, IL 61820";
-	var directionsDisplay = new google.maps.DirectionsRenderer();
+function locationFound(position){
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+	//alert(String(position.coords.latitude)+ "  " + String(position.coords.longitude));
+    var start = new google.maps.LatLng(lat, lng);
+    var end = "706 South 5th St., Champaign, IL 61820";
+    var directionsDisplay = new google.maps.DirectionsRenderer();
 	var directionsService = new google.maps.DirectionsService();
 	directionsDisplay.setMap(map);
 	var request = {
 		origin : start,
 		destination : end,
-		travelMode : google.maps.TravelMode.WALKING
+		travelMode : google.maps.TravelMode.DRIVING
 	};
 	directionsService.route(request, function(result, status) {
 		if(status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(result);
+			var directionsPane = document.getElementById('directions');
+			directionsPane.innerHTML="";
+			directionsDisplay.setPanel(document.getElementById('directions'));
 		}
+
 	});
+}
+function errorCall(error){
+	alert("no location found");
 }
 
 function listenmarker(marker, infowindow, map) {
