@@ -246,6 +246,10 @@ AND m.TypeName = '$typeName'";
 		$q = "SELECT * FROM " . TBL_MAKES ." WHERE DrinkName = '$drink'";
 		return mysql_query($q, $this -> connection);
 	}
+	function getAlcoholicIngredientTypes($drink){
+		$q = "SELECT * FROM " . TBL_MAKES ." WHERE DrinkName = '$drink' AND Alcoholic=1";
+		return mysql_query($q, $this -> connection);
+	}
 	function getIngredientTypesOrdered($drink){
 		$q = "SELECT * FROM " . TBL_MAKES ." WHERE DrinkName = '$drink' ORDER BY TypeName";
 		return mysql_query($q, $this -> connection);

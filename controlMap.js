@@ -1,6 +1,9 @@
 var lastOpenedMarker = null;
-var map;
+var map = null;
+var directionsDisplay =null;
+
 function initialize() {
+	directionsDisplay = new google.maps.DirectionsRenderer();
 	var latlng = new google.maps.LatLng(40.109713, -88.235783);
 	var myOptions = {
 		zoom : 15,
@@ -8,7 +11,7 @@ function initialize() {
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
+	directionsDisplay.setMap(map)
 	var xmlhttp;
 	var geocoder = new google.maps.Geocoder();
 	//document.getElementById('tb').value = ingr;
@@ -46,24 +49,32 @@ function initialize() {
 	
 	if (typeof(navigator.geolocation) != 'undefined') {
 		//alert(typeof(navigator.geolocation.getCurrentPosition));
-	    navigator.geolocation.getCurrentPosition(locationFound,errorCall,{timeout:10000});
+	    //navigator.geolocation.getCurrentPosition(locationFound,errorCall,{timeout:10000});
+	}
+    
+;
+}
+function setDirections(){
+	if (typeof(navigator.geolocation) != 'undefined') {
+		//alert(typeof(navigator.geolocation.getCurrentPosition));
+	     navigator.geolocation.getCurrentPosition(locationFound,errorCall,{timeout:10000});
 	}
 }
-
 function locationFound(position){
+	
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
 	//alert(String(position.coords.latitude)+ "  " + String(position.coords.longitude));
     var start = new google.maps.LatLng(lat, lng);
     var end = "706 South 5th St., Champaign, IL 61820";
-    var directionsDisplay = new google.maps.DirectionsRenderer();
-	var directionsService = new google.maps.DirectionsService();
-	directionsDisplay.setMap(map);
+
 	var request = {
 		origin : start,
 		destination : end,
 		travelMode : google.maps.TravelMode.DRIVING
 	};
+	//alert(typeof(directionsDisplay.getMap()));
+	var directionsService = new google.maps.DirectionsService();
 	directionsService.route(request, function(result, status) {
 		if(status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(result);

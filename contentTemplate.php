@@ -35,6 +35,7 @@
 						$(function() {
 							var width = 810;
 							var height = 410;
+							//setDirections();
 					 		 $('.nyroModalMap').nyroModal({
 							  sizes: {
 							    initW: width, initH: height,
@@ -43,6 +44,7 @@
 							  }});
 				
 						});
+						
 						$(function() {
 					 		 $('.nyroModal').nyroModal();
 				
@@ -141,8 +143,8 @@
 		<div id="rightMenuContainer">
 			<div id="rightMenuContent">
 			<ul>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap">Nearest Bathroom</a></li>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap">Closest Bar</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections()">Nearest Bathroom</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections()">Closest Bar</a></li>
 			</ul>			
 			</div>
 		</div>
