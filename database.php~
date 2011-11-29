@@ -313,6 +313,7 @@ AND m.TypeName = '$typeName'";
 	}
 	function getBarSpecialsByDay($bar,$day){
 		$q = "SELECT * FROM ". TBL_SPECIALS . " WHERE Bar=\"$bar\" AND Day='$day'";
+		echo $q;
 		return mysql_query($q,$this->connection);
 	}
 };

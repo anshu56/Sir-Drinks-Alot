@@ -65,31 +65,31 @@ def main():
 							alcoholicDrink = alcoholicDict[ingred[1]]
 						else:
 							alcoholicDrink = 0
-						if len(re.findall(r'Absolut', ingred[1]))>0:
-							if ingred[1]=='Absolut Vodka':
-								ingred[1] = 'Vodka'
-							if ingred[1]=='Absolut Citron':
-								ingred[1] = 'Citrus vodka'
-							if ingred[1]=='Absolut Mandrin':
-								ingred[1] = 'Orange vodka'
-							if ingred[1]=='Absolut Kurant':
-								ingred[1] = 'Curant vodka'
-							if ingred[1] == 'Absolut Peppar':
-								ingred[1] = 'Pepper Vodka'
-						elif ingred[1] == 'Jack Daniels' or ingred[1]=='Whisky' or ingred[1]=='Jim Beam':
-							ingred[1] = 'Whiskey'
-						elif ingred[1] =='Johnnie Walker':
-							ingred[1] = 'Blended whiskey'
-						elif ingred[1] == 'Jose Cuervo':
-							ingred[1] = 'Tequila'
-						elif ingred[1] == 'Kahlua':
-							ingred[1] = 'Coffee liqueur'
-						elif ingred[1] == 'Hot Damn':
-							ingred[1] = 'Cinnamon schnapps'
-						elif ingred[1] == 'George Dickel':
-							ingred[1] == 'Whiskey'
-						elif ingred[1] == 'Wild Turkey':
-							ingred[1] == 'Whiskey'
+						if len(re.findall(r'Absolut', ingred[0]))>0:
+							if ingred[0]=='Absolut Vodka':
+								ingred[0] = 'Vodka'
+							if ingred[0]=='Absolut Citron':
+								ingred[0] = 'Citrus vodka'
+							if ingred[0]=='Absolut Mandrin':
+								ingred[0] = 'Orange vodka'
+							if ingred[0]=='Absolut Kurant':
+								ingred[0] = 'Curant vodka'
+							if ingred[0] == 'Absolut Peppar':
+								ingred[0] = 'Pepper Vodka'
+						elif ingred[0] == 'Jack Daniels' or ingred[0]=='Whisky' or ingred[0]=='Jim Beam':
+							ingred[0] = 'Whiskey'
+						elif ingred[0] =='Johnnie Walker':
+							ingred[0] = 'Blended whiskey'
+						elif ingred[0] == 'Jose Cuervo':
+							ingred[0] = 'Tequila'
+						elif ingred[0] == 'Kahlua':
+							ingred[0] = 'Coffee liqueur'
+						elif ingred[0] == 'Hot Damn':
+							ingred[0] = 'Cinnamon schnapps'
+						elif ingred[0] == 'George Dickel':
+							ingred[0] == 'Whiskey'
+						elif ingred[0] == 'Wild Turkey':
+							ingred[0] == 'Whiskey'
 						sql = "INSERT INTO Makes (TypeName,Drinkname,Quantity,Alcoholic) VALUES ('{typeName}','{drink}','{quantity}',{alcoholic})"
 						sql = sql.format(typeName=ingred[1],drink=title,quantity = ingred[0],alcoholic = alcoholicDrink)
 						f.write(sql+'\n')

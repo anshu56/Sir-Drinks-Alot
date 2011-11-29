@@ -96,7 +96,7 @@
 				}
 				?>
 				<li><a href="pregame.php" text-align='right'>Pre Game</a></li>
-				<li><a href="barSpecials.php" text-align='right'>The Game</a></li>
+				<li><a href="#" text-align='right'>The Game</a></li>
 				<li><a href="#" text-align='right'>Post Game</a></li>
 				<?
 					if($session->logged_in){

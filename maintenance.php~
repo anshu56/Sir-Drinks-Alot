@@ -15,7 +15,7 @@ include("contentTemplate.php");
 				$result = $database -> getAllIngredientTypesOrdered();
 				$dbarray = mysql_fetch_array($result);
 				while($dbarray!=NULL){
-					echo "<option value=\"".$dbarray['TypeName']."\">". $dbarray['TypeName'] ."</option>";
+					echo "<option value=\"".$dbarray['Category']."\">". $dbarray['TypeName'] ."</option>";
 					$dbarray = mysql_fetch_array($result);
 				}
 			?>
