@@ -44,6 +44,25 @@ function initialize() {
 
 				//alert(results[0].geometry.location);
 			}
+			for(store in jsondata.liquorStoreArray) {
+				var latlng = new google.maps.LatLng(jsondata.liquorStoreArray[store].Latitude, jsondata.liquorStoreArray[store].Longitude)
+				var title2 = jsondata.liquorStoreArray[store].storeName;
+				//alert(String(jsondata.liquorStoreArray[store].Latitude) + " " + String(jsondata.liquorStoreArray[store].Longitude));
+				var marker = new google.maps.Marker({
+					map : map,
+					position : latlng,
+					title : title2,
+					icon: 'glass.png'
+				});
+				var contentString = title2;
+
+				var infowindow = new google.maps.InfoWindow({
+					content : contentString
+				});
+
+				listenmarker(marker, infowindow, map);
+				//alert(results[0].geometry.location);
+			}
 		}
 	}
 	xmlhttp.open("GET", "getBarsMapInfo.php", true);
@@ -56,13 +75,22 @@ function initialize() {
     
 ;
 }
-function setDirections(){
+function setDirections(destType){
 	if (typeof(navigator.geolocation) != 'undefined') {
 		//alert(typeof(navigator.geolocation.getCurrentPosition));
-	     navigator.geolocation.getCurrentPosition(locationFound,errorCall,{timeout:10000});
+		if(destType=='Bar')
+  		navigator.geolocation.getCurrentPosition(locationFoundForBar,errorCall,{timeout:10000});
+		else if(destType=='Store')
+			navigator.geolocation.getCurrentPosition(locationFoundForStore,errorCall,{timeout:10000});
 	}
 }
-function locationFound(position){
+function locationFoundForBar(position){
+	locationFound(position,'Bar');
+}
+function locationFoundForStore(position){
+	locationFound(position,'Store');
+}
+function locationFound(position,destType){
 	
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
@@ -76,17 +104,25 @@ function locationFound(position){
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var jsondata = eval('(' + xmlhttp.responseText + ')');
-			var numBars = jsondata.barsArray.length;
+			var destArray;
+			if(destType=='Bar'){
+				destArray=jsondata.barsArray;
+			}
+			else if(destType=='Store'){
+				destArray=jsondata.liquorStoreArray;
+			}
+			var numOfDest = destArray.length;
 			distanceArray = new Array();
-			for(bar in jsondata.barsArray) {
-				var end = jsondata.barsArray[bar].Address;
+			for(x in destArray) {
+				var end = destArray[x].Address;
+
 				var request = {
 					origin : start,
 					destination : end,
 					travelMode : google.maps.TravelMode.WALKING
 				};
 				var directionsService = new google.maps.DirectionsService();
-				getDirections(directionsService, request,jsondata.barsArray[bar].barName,end,numBars,start);
+				getDirections(directionsService, request,end,numOfDest,start);
 
 			}
 		}
@@ -94,24 +130,24 @@ function locationFound(position){
 	xmlhttp.open("GET", "getBarsMapInfo.php", true);
 	xmlhttp.send();
 }
-function getDirections(directionsService,request,barName,barAddress,numBars,startCoords){
+function getDirections(directionsService,request,address,numOfDest,startCoords){
 		directionsService.route(request, function(result, status) {
 			if(status == google.maps.DirectionsStatus.OK) {
 				var myRoute = result.routes[0].legs[0];
-				var distanceTuple = [barName,myRoute.distance.value,myRoute.distance.text,barAddress,result];
+				var distanceTuple = [myRoute.distance.value,myRoute.distance.text,address,result];
 				distanceArray.push(distanceTuple);
-				if(distanceArray.length==numBars){
+				if(distanceArray.length==numOfDest){
 					var minDist = 1000000000;
 					
 					var closestIndex;
-					for(bar in distanceArray){
+					for(x in distanceArray){
 						
-						if(distanceArray[bar][1]<minDist){
-							minDist=distanceArray[bar][1];
-							closestIndex=bar;
+						if(distanceArray[x][0]<minDist){
+							minDist=distanceArray[x][0];
+							closestIndex=x;
 						}
 					}
-					directionsDisplay.setDirections(distanceArray[closestIndex][4],{suppressMarkers: true});
+					directionsDisplay.setDirections(distanceArray[closestIndex][3],{suppressMarkers: true});
 					var directionsPane = document.getElementById('directions');
 					directionsPane.innerHTML="";
 					directionsDisplay.setPanel(directionsPane);

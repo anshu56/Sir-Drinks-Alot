@@ -144,7 +144,8 @@
 			<div id="rightMenuContent">
 			<ul>
 				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections()">Nearest Bathroom</a></li>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections()">Closest Bar</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections('Bar')">Closest Bar</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections('Store')">Closest Liquor Store</a></li>
 			</ul>			
 			</div>
 		</div>

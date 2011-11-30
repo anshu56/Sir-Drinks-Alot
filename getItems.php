@@ -31,6 +31,24 @@ if($item=="Ingredient"){
 		echo "Not Found";
 	}
 }
+elseif($item=="newRowForStore"){
+    echo "<td>";
+    $index = $_GET['index'];
+		$ingredResult = $database->getIngredients();
+		$ingredArray = mysql_fetch_array($ingredResult);
+		echo "<select id=\"ingred".$index."\">";
+		while($ingredArray!=NULL){
+		  echo "<option value=\"".$ingredArray['IngredientName']."\">". $ingredArray['IngredientName'] ."</option>";
+		  $ingredArray = mysql_fetch_array($ingredResult);
+		}
+		echo "</select>";
+		echo "</td><td>";
+		echo "<input type=\"text\" value=\"\" id=\"price".$index."\"/>";
+		echo "</td><td>";
+		echo "<input type=\"text\" value=\"\" id=\"size".$index."\"/>";
+		echo "</td>";
+		echo "<td> <input type=checkbox id=remSold".$index."> </td>";
+}
 elseif($item=="IngredientFromStore"){
 	$newName = str_replace("!"," ",$_GET['name']);
 	#echo $newName;
@@ -43,7 +61,15 @@ elseif($item=="IngredientFromStore"){
 		while($dbarray!=NULL){
 			echo "<tr id=".$index."><td>";
 			#echo $dbarray['TypeName'] . "  ";
-			echo "<input type=\"text\" value=\"".$dbarray['IngredientName']."\" id=\"ingred".$index."\"/>";
+			echo "<select id=\"ingred".$index."\">";
+			$ingredResult = $database->getIngredients();
+			$ingredArray = mysql_fetch_array($ingredResult);
+			while($ingredArray!=NULL){
+			  echo "<option value=\"".$dbarray['IngredientName']."\" id=\"ingred".$index."\">". $ingredArray['IngredientName'] ."</option>";
+			  $ingredArray = mysql_fetch_array($ingredResult);
+			}
+			echo "</select>";
+			//echo "<input type=\"text\" value=\"".$dbarray['IngredientName']."\" id=\"ingred".$index."\"/>";
 			echo "</td><td>";
 			echo "<input type=\"text\" value=\"".$dbarray['Price']."\" id=\"price".$index."\"/>";
 			echo "</td><td>";

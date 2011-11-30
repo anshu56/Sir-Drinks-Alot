@@ -140,7 +140,24 @@ function addIngredientToStore(){
 	var newRow = tbl.insertRow(lastRow);
 	lastRow = lastRow-1;
 	newRow.setAttribute('id',"sold"+lastRow);
-	var newCell = newRow.insertCell(0);
+	var xmlhttp;
+ 	//document.getElementById('tb').value = ingr;
+ 	if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	}
+	else{// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+                        newRow.innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","getItems.php?Item=newRowForStore&index="+lastRow,true);
+	xmlhttp.send();
+
+	/*var newCell = newRow.insertCell(0);
 	var el = document.createElement('input');
 	el.type = 'text';
 	el.id = "ingred"+lastRow;
@@ -166,7 +183,7 @@ function addIngredientToStore(){
 	button1.setAttribute('name','Remove');
 	button1.setAttribute('id','remSold'+lastRow);
 	button1.onclick
-	newCell4.appendChild(button1);
+	newCell4.appendChild(button1);*/
 }
 function updateStoreSoldList(store){
 	var tbl = document.getElementById("soldTable");
@@ -185,9 +202,10 @@ function updateStoreSoldList(store){
 		var ingred = document.getElementById('ingred'+i);
 		var price = document.getElementById('price'+i);
 		var size = document.getElementById('size'+i);
-		if(ingred!=null && price!=null && size!=null && ingred.value!="" && price.value!="" && size.value!=null){
-			var ing = ingred.value;
-			var ing2 = ingred.value.replace(" ","!");
+
+		if(ingred!=null && price!=null && size!=null && ingred.options[ingred.selectedIndex].value!="" && price.value!="" && size.value!=null){
+			var ing = ingred.options[ingred.selectedIndex].value;
+			var ing2 = ing.replace(" ","!");
 			while(ing!=ing2){
 				ing = ing2;
 				ing2 = ing2.replace(" ","!");

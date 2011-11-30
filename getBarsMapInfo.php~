@@ -42,6 +42,6 @@ echo "{";
 		$first=false;
 		$store = mysql_fetch_array($result);
 	}
-	echo "]";
+	echo "],";
 echo "}";
 ?>
