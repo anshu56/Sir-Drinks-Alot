@@ -23,7 +23,7 @@ window.location="http://rustagi1.projects.cs.illinois.edu/DrinksAlot/home.php";
 }
 function insertFloatIMG(){
 
-styleStr = "<Style>.imgFloat {"+absStr+";Margin-Left:0px;Margin-Right:0px;Margin-Top:0px;Margin-Bottom:0px;}</Style>";
+styleStr = "<Style>.imgFloat {"+absStr+";Margin-Left:0px;Margin-Right:0px;Margin-Top:0px;Margin-Bottom:0px;z-index:5;}</Style>";
 
 divStr = "<DIV class=imgFloat id=isFloat><input type=image src=null onClick=\"goHome()\" id=fIMG alt='Describe the Image'></DIV>"
 
@@ -42,10 +42,12 @@ nTop = isFloat.offsetTop;
 	insertFloatIMG();
 </script>
 </p>
+<div style="position:absolute; left:0; right:1;">
 
 <h2 style="text-align: right;">
 Sir Drinks-A-Lot
 </h2>
 <h3>
 Drink Responsibly...
-</h3> 
+</h3>
+</div> 

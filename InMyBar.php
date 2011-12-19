@@ -6,7 +6,7 @@
 	<script type="text/javascript">
 		var arSelected = new Array();
 		function findDrinks(){
-		 	var nm1 = $('#imgFiche').nyroModal({closeOnClick: false,showCloseButton:true,callbacks : {
+		 	var nm1 = $('#imgFiche').nyroModal({closeOnClick: false,showCloseButton:false,callbacks : {
                 afterShowCont: function() {
                     getPossibleDrinks();
                     //alert("called");

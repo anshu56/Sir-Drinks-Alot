@@ -10,10 +10,19 @@ include("contentTemplate.php");
 			<input type="text" maxlength="25" name="ingredientname" />
 			<br />
 			Ingredient Type:
-			<input type="text" maxlength="25" name="type" />
+			<select name="type">
+			<?
+				$result = $database -> getAllIngredientTypesOrdered();
+				$dbarray = mysql_fetch_array($result);
+				while($dbarray!=NULL){
+					echo "<option value=\"".$dbarray['TypeName']."\">". $dbarray['TypeName'] ."</option>";
+					$dbarray = mysql_fetch_array($result);
+				}
+			?>
+			</select>
 			<br />
 			Proof:
-			<input type="text" maxlength="3" name="proof" />
+			<input type="text" maxlength="10" name="proof" />
 			<input type="hidden" name="subaddingredient" value="1" />
 			<br />
 			<input type="submit" name="submit" value="Add Ingredient" />
@@ -33,7 +42,16 @@ include("contentTemplate.php");
 			<input type="text" maxlength="25" name="difficulty" />
 			<br />
 			Drink Category:
-			<input type="text" maxlength="25" name="category" />
+			<select name="category">
+			<?
+				$result = $database -> getAllDrinkCategories();
+				$dbarray = mysql_fetch_array($result);
+				while($dbarray!=NULL){
+					echo "<option value=\"".$dbarray['Category']."\">". $dbarray['Category'] ."</option>";
+					$dbarray = mysql_fetch_array($result);
+				}
+			?>
+			</select>
 			<br />
 			Drink Recipe:<br/>
 			<textarea rows='5' cols='80' name="recipe" ></textarea>
@@ -94,6 +112,70 @@ include("contentTemplate.php");
 		</select>
 		<div id="ingredSoldList"> Ingredients Will Be Listed Here </div>
 		
+		<br>
+		<br>
+		<script type="text/javascript">
+			function addPollOption(){
+					
+				var tbl = document.getElementById('addPollTable');
+				var lastRow = tbl.rows.length;
+				// if there's no header row in the table, then iteration = lastRow + 1
+				var newRow = tbl.insertRow(lastRow);
+				lastRow = lastRow;
+				newRow.setAttribute('id',lastRow);
+				var newCell = newRow.insertCell(0);
+				var el = document.createElement('input');
+				el.type = 'text';
+				el.id = "poll"+lastRow;
+				newCell.appendChild(el);
+			}
+			function createNewPoll(id){
+				var tbl = document.getElementById("addPollTable");
+				//document.getElementById(0).innerHTML = "Hello";
+				var lastRow = tbl.rows.length;
+				var str = "";
+				for(var i=0;i<lastRow;i++){
+					var poll = document.getElementById('poll'+i);
+					if(poll.value!=null){
+						alert(poll.value);
+						str+="val"+i+"="+poll.value+"&";
+					}
+				}
+				string = str.slice(0,-1);
+				
+				var xmlhttp;
+				if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+					xmlhttp=new XMLHttpRequest();
+				}
+				else{// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange=function(){
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+						//document.getElementById(0).innerHTML =xmlhttp.responseText;
+						alert(xmlhttp.responseText);
+					}
+				}
+				alert(string);
+				xmlhttp.open("GET","addPoll.php?pollId="+id+"&"+string,true);
+				xmlhttp.send();
+			}
+		</script>	
+		<h1> Add Poll </h1>
+			<?
+				$result = $database -> query("SELECT Max(poll_id) FROM Polls");
+				$dbarray = mysql_fetch_array($result);
+				$poll_id = $dbarray['Max(poll_id)']+1;
+				//$database -> query("INSERT INTO Polls(poll_id) VALUES ($poll_id)");
+			?>
+			<table id='addPollTable'>
+			<tr><td><input type="text" maxlength="25" id="poll0"/></td></tr>
+			</Table>
+			<button onclick=addPollOption()>Add Option</button>
+			<?
+			echo "<button onclick=createNewPoll('".$poll_id."')>Submit Poll</button>";
+			?>
 		<script type="text/javascript">
 		 	function removeIngredient(ingr){
 			 	var xmlhttp;

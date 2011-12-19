@@ -12,6 +12,7 @@ define("TBL_SELLS", "Sells");
 define("TBL_MAKES", "Makes");
 define("TBL_DRINKPREF","PreferredDrink");
 define("TBL_BARS", "Bars");
+define("TBL_SPECIALS", "Specials");
 
 define("GUEST_NAME", "Guest");
 

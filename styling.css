@@ -9,8 +9,8 @@ background-attachment:fixed;
 }
 
 h2{
-	
-	color:#c4852d;
+
+	color:#c4852f;
 	text-align:center;
 	font-size:100px;
 	background-color:red;
@@ -36,6 +36,13 @@ font-family:"Apple Chancery", "Zapf Chancery", cursive;
 text-align:right;
 margin: 0px;
 }
+h5{
+color:#785e23;
+font-size:30px;
+font-family:"Apple Chancery", "Zapf Chancery", cursive;
+text-align:left;
+margin: 0px;
+}
 a:link,a:visited {
 	color:#5C4033;
 }
@@ -51,7 +58,7 @@ img.but{
 	margin-left:auto;
 	position:relative;
 
-	border: 1px solid #0000ff;
+
 
 	z-index:2;
 	
@@ -60,6 +67,18 @@ img.but:hover{
 	opacity:0.4;
 	filter:alpha(opacity=40);
 }
+img.banner{
+ 
+	display:block;
+	z-index:1;
+	margin-right:auto;
+	margin-left:auto;
+	background-color:red;
+	margin:60px 0px 60px 500px;
+	padding-left:600;
+	
+}
+
 img.man{
 	display:block;
 	z-index:1;
@@ -81,9 +100,8 @@ img.man{
 	bottom: 10px;
 	padding:10px;
 	left: 500px;
-	
-	width: 784px; /* width + border for IE 5.x */
-	width: 780px; /* real width */
+	width: 750px; /* width + border for IE 5.x */
+	width: 750px; /* real width */
 	
 
 	margin: auto;
@@ -99,10 +117,36 @@ img.man{
 	border-width: 40px;	
 	border-radius: 15px;
 	-moz-border-radius: 15px;
+	overflow: auto;
+}
+#topLeftMenuContainer{
+	position: absolute;
+	top:450px;
+	
+	padding:10px;
+	left: 150px;
+	
+	width: 250px; /* width + border for IE 5.x */
+	width: 250px; /* real width */
+	
+
+	margin: auto;
+}
+#topLeftMenuContent{
+	background-color:white;
+	position: relative;
+	padding:10px;
+	padding-left:50px;
+	padding-right:50px;
+	/*border: dashed #036;*/
+	border-width: 40px;	
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+
 }
 #menuContainer{
 	position: absolute;
-	top:450px;
+	top:650px;
 	bottom: 10px;
 	padding:10px;
 	left: 150px;
@@ -150,20 +194,20 @@ img.man{
 	-moz-border-radius: 15px;
 
 }
-#rightMenuContainer{
+#rightPollContainer{
 	position: absolute;
-	top:450px;
+	top:350px;
 	bottom: 10px;
 	padding:10px;
 	left: 1300px;
 	
-	width: 250px; /* width + border for IE 5.x */
-	width: 250px; /* real width */
+	width: 300px; /* width + border for IE 5.x */
+	width: 300px; /* real width */
 	
 
 	margin: auto;
 }
-#rightMenuContent{
+#rightPollContent{
 	background-color:white;
 	position: relative;
 	padding:10px;
@@ -196,6 +240,36 @@ img.man{
 #drinkOfTheDay h4{
 	text-align:center;
 	
+}
+#fakebutton{
+  width : 200px;
+  height : auto;
+  display : block;
+  border : 2px outset #785e23;
+  text-decoration : none;
+  background-color : #785e23;
+  color : #eee;
+  font-weight : bold;
+  padding : 3px 10px; /* these initial top/bottom left/right padding values are critical to create a baseline left/right value can be whatever but must exist */
+  outline : 0;
+  cursor :  pointer; /* this is needed for Opera due to the current style - weird but true */
+}
+
+/* 
+  I made hover and focus the same, the button isn't pushed yet, but...
+*/
+
+
+/* 
+  This is focus in IE... for other browsers, the button is depressed when clicked or Enter it pressed.
+  When using a 2px border, the padding will shift 1px left and to the top
+*/
+
+#fakebutton:active {
+  border : 2px inset #5C3317;
+  background-color : #5C3317; /* the darker colors help create the effect */
+  color : #999;
+  padding : 2px 11px 4px 9px; /* these new padding values are the mainstay or the effect to create natural movement */
 }
 th
 {

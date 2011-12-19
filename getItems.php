@@ -31,6 +31,24 @@ if($item=="Ingredient"){
 		echo "Not Found";
 	}
 }
+elseif($item=="newRowForStore"){
+    echo "<td>";
+    $index = $_GET['index'];
+		$ingredResult = $database->getIngredientsOrdered();
+		$ingredArray = mysql_fetch_array($ingredResult);
+		echo "<select id=\"ingred".$index."\">";
+		while($ingredArray!=NULL){
+		  echo "<option value=\"".$ingredArray['IngredientName']."\">". $ingredArray['IngredientName'] ."</option>";
+		  $ingredArray = mysql_fetch_array($ingredResult);
+		}
+		echo "</select>";
+		echo "</td><td>";
+		echo "<input type=\"text\" value=\"\" id=\"price".$index."\"/>";
+		echo "</td><td>";
+		echo "<input type=\"text\" value=\"\" id=\"size".$index."\"/>";
+		echo "</td>";
+		echo "<td> <input type=checkbox id=remSold".$index."> </td>";
+}
 elseif($item=="IngredientFromStore"){
 	$newName = str_replace("!"," ",$_GET['name']);
 	#echo $newName;
@@ -43,7 +61,18 @@ elseif($item=="IngredientFromStore"){
 		while($dbarray!=NULL){
 			echo "<tr id=".$index."><td>";
 			#echo $dbarray['TypeName'] . "  ";
-			echo "<input type=\"text\" value=\"".$dbarray['IngredientName']."\" id=\"ingred".$index."\"/>";
+			echo "<select id=\"ingred".$index."\">";
+			$ingredResult = $database->getIngredients();
+			$ingredArray = mysql_fetch_array($ingredResult);
+			while($ingredArray!=NULL){
+				if($ingredArray['IngredientName']==$dbarray['IngredientName'])
+			  	echo "<option value=\"".$ingredArray['IngredientName']."\" id=\"ingred".$index."\" selected='selected'>". $ingredArray['IngredientName'] ."</option>";
+			  else
+			  	echo "<option value=\"".$ingredArray['IngredientName']."\" id=\"ingred".$index."\">". $ingredArray['IngredientName'] ."</option>";
+			  $ingredArray = mysql_fetch_array($ingredResult);
+			}
+			echo "</select>";
+			//echo "<input type=\"text\" value=\"".$dbarray['IngredientName']."\" id=\"ingred".$index."\"/>";
 			echo "</td><td>";
 			echo "<input type=\"text\" value=\"".$dbarray['Price']."\" id=\"price".$index."\"/>";
 			echo "</td><td>";
@@ -56,7 +85,7 @@ elseif($item=="IngredientFromStore"){
 		}
 		echo "</table>";
 		echo "<td> <button onclick=\"addIngredientToStore()\">Add Ingredient</button> </td>";
-		echo "<td> <button onclick=\"updateStoreSoldList('".$_GET['name']."')\">Update Recipe</button> </td>";
+		echo "<td> <button onclick=\"updateStoreSoldList('".$_GET['name']."')\">Update List</button> </td>";
 		
 	}
 	else{

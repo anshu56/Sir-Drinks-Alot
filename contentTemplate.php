@@ -9,6 +9,10 @@
  *	<body>
  *<html>
  */
+ $username;
+ if($session->logged_in){
+   $username= $session->getUser();
+ }
 ?>
 <html>
 	<head>
@@ -56,7 +60,7 @@
 		<h4>
 			<?
 				if($session->logged_in){
-					$dbArray = $database->getUserInfo($session->getUser());
+					$dbArray = $database->getUserInfo($username);
 					echo "Welcome ".$dbArray['Name'];
 					echo "&nbsp";
 					echo "<a href=\"process.php\" text-align='right'>Logout</a></h4>";
@@ -96,21 +100,27 @@
 				}
 				?>
 				<li><a href="pregame.php" text-align='right'>Pre Game</a></li>
-				<li><a href="#" text-align='right'>The Game</a></li>
-				<li><a href="#" text-align='right'>Post Game</a></li>
+				<li><a href="barSpecials.php" text-align='right'>The Bars</a></li>
 				<?
-					if($session->logged_in){
-						echo"<li><a href=\"InMyBar.php\" text-align='right'>In My Bar</a></li>";
-					}
+					
+					echo"<li><a href=\"InMyBar.php\" text-align='right'>After Hours</a></li>";
+					
 					if($database->getAdmin($session->getUser())){
 						echo"<li><a href=\"maintenance.php\" text-align='right'>Maintenance</a></li>";
+						
 					}
 				?>
 			</ul>
 			</div>
 		</div>
-
-		<div id="menuContainer">
+		<?
+		if($session->logged_in){
+		    echo"<div id=\"menuContainer\">";
+		}
+		else{
+			echo "<div id=\"menuContainer\" style='top:450px;'>";
+		}
+		?>
 			<div id="menuContent">
 				<ul id="red" class="treeview-red">
 					<li><span>Drinks</span>
@@ -140,15 +150,35 @@
 					</ul>
 			</div>
 		</div>
-		<div id="rightMenuContainer">
-			<div id="rightMenuContent">
+		<?
+		if($session->logged_in){
+		?>
+		<div id="rightPollContainer">
+			<div id="rightPollContent">
+				<?
+					include('bars.php');
+				$result = $database -> query("SELECT Max(poll_id) FROM Polls");
+				$dbarray = mysql_fetch_array($result);
+				$poll_id = $dbarray['Max(poll_id)'];
+					showPoll($poll_id);
+				?>			
+			</div>
+		</div>
+		<?}?>
+		
+		<?
+		if($session->logged_in){
+		?>
+		<div id="topLeftMenuContainer">
+			<div id="topLeftMenuContent">
 			<ul>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections()">Nearest Bathroom</a></li>
-				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections()">Closest Bar</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections('Bar')">Closest Bar</a></li>
+				<li><a href="#displayMap" style="text-decoration: none;" class="nyroModalMap" onclick="setDirections('Store')">Closest Liquor Store</a></li>
 			</ul>			
 			</div>
 		</div>
 		<?
+			}
 			include("displayMap.php");
 		?>
 		<div id="container">

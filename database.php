@@ -241,7 +241,10 @@ AND m.TypeName = '$typeName'";
 		$q = "SELECT * From ". TBL_STORES;
 		return mysql_query($q, $this -> connection);
 	}
-	
+	function getStoreInfo($store){
+		$q = "SELECT * From ". TBL_STORES . " WHERE StoreName='$store'";
+		return mysql_query($q, $this -> connection);
+	}
 	function getIngredientTypes($drink){
 		$q = "SELECT * FROM " . TBL_MAKES ." WHERE DrinkName = '$drink'";
 		return mysql_query($q, $this -> connection);
@@ -249,6 +252,12 @@ AND m.TypeName = '$typeName'";
 	function getAlcoholicIngredientTypes($drink){
 		$q = "SELECT * FROM " . TBL_MAKES ." WHERE DrinkName = '$drink' AND Alcoholic=1";
 		return mysql_query($q, $this -> connection);
+	}
+	function getNumAlcoholicIngredientTypes($drink){
+		$q = "SELECT COUNT(TypeName) From ". TBL_MAKES ." WHERE DrinkName='$drink' AND Alcoholic=1";
+		$result = mysql_query($q, $this -> connection);
+		$resultArray = mysql_fetch_array($result);
+		return $resultArray['COUNT(TypeName)'];
 	}
 	function getIngredientTypesOrdered($drink){
 		$q = "SELECT * FROM " . TBL_MAKES ." WHERE DrinkName = '$drink' ORDER BY TypeName";
@@ -258,6 +267,10 @@ AND m.TypeName = '$typeName'";
 		$q = "SELECT DISTINCT TypeName FROM " . TBL_MAKES ." ORDER BY TypeName";
 		return mysql_query($q, $this -> connection);
 	}
+	function getIngredientsByType($TypeName){
+		$q = "SELECT DISTINCT IngredientName,Proof FROM " . TBL_INGREDIENTS ." WHERE TypeName='$TypeName' ORDER BY IngredientName";
+		return mysql_query($q, $this -> connection);
+	}
 	function getAllAlcoholicIngredientTypesOrdered(){
 		$q = "SELECT DISTINCT TypeName FROM " . TBL_MAKES ." WHERE Alcoholic=1 ORDER BY TypeName";
 		return mysql_query($q, $this -> connection);
@@ -265,7 +278,19 @@ AND m.TypeName = '$typeName'";
 	function getIngredientsSoldOrdered($store){
 		$q = "SELECT * FROM " . TBL_SELLS ." WHERE StoreName = '$store' ORDER BY IngredientName";
 		return mysql_query($q, $this -> connection);
-		
+	}
+	function getIngredientInformation($ing){
+		$q = "SELECT * FROM " . TBL_INGREDIENTS ." WHERE IngredientName = '$ing' ORDER BY IngredientName";
+		return mysql_query($q, $this -> connection);
+	}
+	function getTypeSoldOrdered($typeName,$store){
+		$q = "SELECT * FROM " . TBL_SELLS . " s, " . TBL_INGREDIENTS . " i WHERE s.StoreName = '$store' AND s.IngredientName=i.IngredientName AND i.TypeName='$typeName' ORDER BY s.Price";
+		#echo $q;
+		return mysql_query($q, $this -> connection);
+	}
+	function getStoresSellingIngredient($ingredient){
+		$q = "SELECT * FROM " . TBL_SELLS ." WHERE IngredientName = '$ingredient' ORDER BY Price";
+		return mysql_query($q, $this -> connection);
 	}
 	function deleteRecipe($drink){
 		$q = "DELETE FROM " .TBL_MAKES ." WHERE DrinkName='$drink'";
@@ -305,6 +330,14 @@ AND m.TypeName = '$typeName'";
 	}
 	function getAllBarsMapInfo(){
 		$q = "SELECT * FROM ". TBL_BARS;
+		return mysql_query($q,$this->connection);
+	}
+	function getBarNames(){
+		$q = "SELECT Name FROM ". TBL_BARS;
+		return mysql_query($q,$this->connection);
+	}
+	function getBarSpecialsByDay($bar,$day){
+		$q = "SELECT * FROM ". TBL_SPECIALS . " WHERE Bar=\"$bar\" AND Day='$day'";
 		return mysql_query($q,$this->connection);
 	}
 };

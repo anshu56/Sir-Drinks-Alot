@@ -20,19 +20,22 @@ if($session->logged_in){
 				window.location="http://rustagi1.projects.cs.illinois.edu/DrinksAlot/pregame.php";
 			}
 			function goToThegame(){
-				window.location="http://www.facebook.com";
+				window.location="http://rustagi1.projects.cs.illinois.edu/DrinksAlot/barSpecials.php";
 			}
 			function goToPostgame(){
-				window.location="http://www.google.com";
+				window.location="http://rustagi1.projects.cs.illinois.edu/DrinksAlot/InMyBar.php";
 			}
 		</script>
-		<h2>Sir Drinks-A-Lot</h2>
+		<h2>Sir Drinks-A-Lot </h2>
+		
 		<img class="man" src="Sir DrinksALot2.png" width=350>
-		<table id='pageOptionsTable' width="75%">
+		
+		
+		<table id='pageOptionsTable' width="75%" style="border:0">
  			<tr>	
- 				<td align='centert'><img class="but" onclick="goToPregame()" src="pregame.png" width=250 height=250 >
- 				<td align='centert'><img class="but" onclick="goToThegame()" src="thegame.png" width=250 height=250></td>
- 				<td align='centert'><img class="but" onclick="goToPostgame()" src="postgame.png" width=250 height=250></td>
+ 				<td align='centert'><img class="but" onclick="goToPregame()" src="pregame.png" width=250 height=250 border:0px></td>
+ 				<td align='centert'><img class="but" onclick="goToThegame()" src="atbars.png" width=250 height=250></td>
+ 				<td align='centert'><img class="but" onclick="goToPostgame()" src="after_hours.png" width=250 height=250></td>
  			</tr>
   		</table>
 		
@@ -70,7 +73,7 @@ if($session->logged_in){
 			include("RegisterForm.php");
 		?>
 		</div>	
-		
+
 		<script type="text/javascript">
 			$(function() {
 			  $('.nyroModal').nyroModal();

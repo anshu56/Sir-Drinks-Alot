@@ -44,7 +44,7 @@ while(count($numExtraDrinksArr)>0){
 	echo "<H4 style='text-align:left'> $numExtra Extra Alcoholic Ingredients </H4>";
 	foreach($keys as $drink){
 		if($numExtraDrinksArr[$drink]==$numExtra){
-			echo "<a href='drinkDetails.php?dname=$drink'>".$drink."</a>";
+			echo "<a href='drinkDetails.php?dname=$drink' target='_blank'>".$drink."</a>";
 			echo "</br>";
 			unset($numExtraDrinksArr[$drink]);
 		}
