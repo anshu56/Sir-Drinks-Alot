@@ -61,7 +61,7 @@
 			<?
 				if($session->logged_in){
 					$dbArray = $database->getUserInfo($username);
-					echo "Welcome ".$dbArray['Name'];
+					echo "Welcome2 ".$dbArray['Name'];
 					echo "&nbsp";
 					echo "<a href=\"process.php\" text-align='right'>Logout</a></h4>";
 				}

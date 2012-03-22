@@ -1,8 +1,8 @@
 <?
 define("DB_SERVER", "localhost");
-define("DB_USER", "rustagi1_develop");
-define("DB_PASS", "chugchug");
-define("DB_NAME", "rustagi1_drinksalot");
+define("DB_USER", "dep5hwa6szp");
+define("DB_PASS", "5Ybt3fzH6DdfWKx");
+define("DB_NAME", "dep5hwa6szp");
 
 define("TBL_USERS", "User");
 define("TBL_INGREDIENTS", "Ingredients");
